@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Grid Calculator</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1>Calculator</h1>
+    <div class="header">
+      <h1>Calculator</h1>
+      <button id="toggle-theme" title="Toggle Theme">🌙</button>
+    </div>
     <form name="clc">
       <input type="text" name="display" class="display" readonly>
       <div class="grid">
@@ -29,10 +33,27 @@
         
         <input class="btn" type="button" value="9" onclick="clc.display.value += '9'">
         <input class="btn clear" type="button" value="C" onclick="clc.display.value = ''">
-        <input class="btn equal" type="button" value="=" onclick="clc.display.value = eval(clc.display.value)">
+        <input class="btn equal" type="button" value="=" onclick="calculate()">
         <input class="btn op" type="button" value="/" onclick="clc.display.value += '/'">
       </div>
     </form>
   </div>
+
+  <script>
+    function calculate() {
+      try {
+        clc.display.value = eval(clc.display.value);
+      } catch (e) {
+        clc.display.value = "Error";
+      }
+    }
+
+    // Toggle dark mode
+    const toggle = document.getElementById("toggle-theme");
+    toggle.onclick = () => {
+      document.body.classList.toggle("dark-mode");
+      toggle.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    };
+  </script>
 </body>
 </html>
